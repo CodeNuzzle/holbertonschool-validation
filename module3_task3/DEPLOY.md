@@ -1,46 +1,25 @@
-name: module3_task3
+# Deployment Document
 
-on:
-  push:
-    tags:
-      - '*'
+- What is in the archive and how to unarchive it?
 
-jobs:
-  release:
-    runs-on: ubuntu-latest
+- It is a compressed file that is the awesome-api binary and is 'dist directory'.
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+- Syntax to unzip the zip package
+  
+  - Run unzip awesome-website.zip
 
-      - name: Set up Hugo
-        uses: peaceiris/actions-hugo@v2
-        with:
-          hugo-version: 'latest'
+- How to verify the version
+  
+  - Run git tag
 
-      - name: Build Hugo website
-        run: hugo --minify --source ./website
+- What are the commands to start and stop the application?
 
-      - name: Create release
-        uses: softprops/gh-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          files: |
-            awesome-website.zip
-          release_name: ${{ github.ref }}
-          body: |
-            $(cat DEPLOY.md)
-          body_path: ./DEPLOY.md
+  - Use Hugo server, sintax type hugo server
 
-      - name: Update DEPLOY.md
-        run: echo "::set-output name=content::$(cat DEPLOY.md | sed -e 's/\[tag\]/${{ github.ref }}/g')" > ${{ github.workspace }}/DEPLOY.md
+- How to customize where the application logs are written?
 
-      - name: Commit and push changes
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: Update DEPLOY.md
-          commit_options: '--author="GitHub Actions"'
+- I do not know yet
 
-      - name: Push changes
-        run: git push origin ${{ github.ref }}
+- How to “quickly” verify that the application is running (healthcheck)?
+
+- Check it out on local host [http://localhost:1313]

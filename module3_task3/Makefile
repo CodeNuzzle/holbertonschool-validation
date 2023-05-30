@@ -1,48 +1,43 @@
-lint: ## lint
-	markdownlint -f DEPLOY.md README.md || true
+# Define variables
+Publish=hugo
+SHELLCHECK=shellcheck
 
-build: check ## Build awesome-api
-	go build -o awesome-api
-	hugo -d dist/
+build: ## Builds a new website
+	$(Publish)
 
-run: ## Run awesome-api application
-	./awesome-api >./awesome-api.log 2>&1 &
+clean: ## Remove all files from folder dist
+	rm -r dist/*
 
-stop: ## Stop awesome-api application
-	pkill awesome-api || true
-
-clean: ## Clean awesome-api application and log
-	pkill awesome-api || true
-	rm -f awesome-api awesome-api.log coverage-units.out coverage-integrations.out
-	rm -rf ./dist
-post: ## Create a new blog post
-	hugo new posts/$(POST_NAME).md
+post: ## Create new post and using the sed command to modify the contents of a file.
+	$(Publish) new posts/$(POST_NAME).md
 	sed -i 's/title: .*/title: "$(POST_TITLE)"/' content/posts/$(POST_NAME).md
 
-test: ## Test current connection
-	make unit-tests
-	make integration-tests
+lint: ## shellcheck setup
+	markdownlint README.md
+	markdownlint DEPLOY.md
+	$(SHELLCHECK) setup.sh >/dev/null 2>&1 || echo "Lint Failed"
 
-unit-tests: ## Run tests to check for HelloHandler coverage
-	go test -v -short -coverprofile=coverage-units.out
+markdownlint: ## updated to lint the files README.md and DEPLOY.md
+	markdownlint README.md
+	markdownlint DEPLOY.md
 
-integration-tests: ## Run tests to check integrations coverage
-	go test -v -coverprofile=coverage-integrations.out
-check: ## Check markdown files
-	markdownlint ./content/posts/*.md
-	markdown-link-check ./content/posts/*.md
+integration-tests: ## server and check the localhost
+	hugo
+	ls dist/
 
-validate: ## Validate HTML  W3C Validator
+unit-tests: ## Runs different makefile recipes
+	make POST_TITLE='TEST' POST_NAME='this-is-a-test' post
 	make build
-	git clone https://github.com/holbertonschool/W3C-Validator.git
+	make clean
 
-package: ## Produce awesome-website.zip containing awesome-api and dist directory
-	zip -FSr awesome-website.zip . -i dist/ awesome-api
-	@if [ ! -f "awesome-website.zip" ]; then \
-		echo "Failed to generate awesome-website.zip"; \
-		exit 1; \
-	fi
+validate: ## Tests dir
+	pwd
 
-.SILENT:
-help: ## Display what each command does
+package: ## creates archive
+	make build
+	zip awesome-website.zip dist/	
+
+help: ## Display the list of targets and their usage.
 	cat Makefile | grep '##' | tr -d '##' | head -n -1
+
+
