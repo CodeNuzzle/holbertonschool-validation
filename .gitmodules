@@ -1,0 +1,33 @@
+[submodule "module1_task0/themes/ananke"]
+	path = module1_task0/themes/ananke
+	url = https://github.com/theNewDynamic/gohugo-theme-ananke.git
+[submodule "module1_task1/themes/ananke"]
+	path = module1_task1/themes/ananke
+	url = https://github.com/theNewDynamic/gohugo-theme-ananke.git
+[submodule "module1_task2/themes/ananke"]
+	path = module1_task2/themes/ananke
+	url = https://github.com/theNewDynamic/gohugo-theme-ananke.git
+[submodule "module1_task3/themes/ananke"]
+	path = module1_task3/themes/ananke
+	url = https://github.com/theNewDynamic/gohugo-theme-ananke.git
+[submodule "module1_task4/themes/ananke"]
+	path = module1_task4/themes/ananke
+	url = https://github.com/theNewDynamic/gohugo-theme-ananke.git
+[submodule "module2_task0/themes/ananke"]
+	path = module2_task0/themes/ananke
+	url = https://github.com/theNewDynamic/gohugo-theme-ananke.git
+[submodule "module2_task1/themes/ananke"]
+	path = module2_task1/themes/ananke
+	url = https://github.com/theNewDynamic/gohugo-theme-ananke.git
+[submodule "module2_task2/themes/ananke"]
+	path = module2_task2/themes/ananke
+	url = https://github.com/theNewDynamic/gohugo-theme-ananke.git
+[submodule "module2_task3/themes/ananke"]
+	path = module2_task3/themes/ananke
+	url = https://github.com/theNewDynamic/gohugo-theme-ananke.git
+[submodule "module2_task4/themes/ananke"]
+	path = module2_task4/themes/ananke
+	url = https://github.com/theNewDynamic/gohugo-theme-ananke.git
+[submodule "module3_task1/themes/ananke"]
+	path = module3_task1/themes/ananke
+	url = https://github.com/theNewDynamic/gohugo-theme-ananke.git
